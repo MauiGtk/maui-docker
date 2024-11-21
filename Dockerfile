@@ -11,7 +11,6 @@ RUN git clone https://github.com/GtkSharp/GtkSharp.git
 WORKDIR /mauienv/GtkSharp
 RUN sed -i 's/"8.0.100", "8.0.200"}/"8.0.100", "8.0.200", "8.0.300", "8.0.400"}/g' build.cake  # add missing version bands
 RUN dotnet tool restore
-COPY launch.json .vscode
   # ^ this allows debugging using the vscode devcontainer extension 
 RUN dotnet cake --verbosity=diagnostic --BuildTarget=InstallWorkload 
 RUN apt update
