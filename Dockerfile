@@ -12,9 +12,9 @@ WORKDIR /mauienv/GtkSharp
 RUN sed -i 's/"8.0.100", "8.0.200"}/"8.0.100", "8.0.200", "8.0.300", "8.0.400"}/g' build.cake  # add missing version bands
 RUN dotnet tool restore
   # ^ this allows debugging using the vscode devcontainer extension 
-RUN dotnet cake --verbosity=diagnostic --BuildTarget=InstallWorkload 
+RUN dotnet cake --verbosity=diagnostic --BuildTarget=InstallWorkload
 RUN apt update
-RUN apt install -y libgtk-3-dev libgtksourceview-4-0 
+RUN apt install -y libgtk-3-dev libgtksourceview-4-0
 RUN dotnet new install GtkSharp.Template.CSharp
 
 # install MAUI
@@ -26,7 +26,8 @@ WORKDIR /mauienv/maui-linux
 RUN sed -i 's/_IncludeAndroid>true/_IncludeAndroid>/g' Directory.Build.Override.props
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
+RUN apt clean
+WORKDIR /mauienv/maui-linux/src/Controls/samples/Controls.Sample
+# xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk & xhost -
+# alternatively, you could uncomment the above command and attach a VS Code instance to the container; then run it there.
 
-# running the sample app won't work as the container doesn't have a display attached -- use VS Code to do the trick!
-# WORKDIR cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
-# dotnet run --framework net8.0-gtk
