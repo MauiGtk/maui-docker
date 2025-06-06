@@ -12,11 +12,12 @@ After git-cloning and cd into the repo, build the image:
 
 This will build MAUI along with GtkSharp already. Then start the container using (this can take a minute to start up):
 
-    xhost +
-    docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk
-    xhost -
+    xhost +  # allow docker to use the X display
+    docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk  # replace the 'dotnet ...' command with 'bash' to have a look inside the container
+    xhost -  # restrict access control again
 
-Alternatively, use Visual Studio Code to handle the display: Start VS Code in a new bash outside the container with `code .`,
+Alternatively, use Visual Studio Code to handle the display and have a deeper look at the MAUI sources: 
+Start VS Code in a new bash outside the container with `code .`,
 then install VS Codes 'Dev Containers' and 'Docker' extension. After that, right click the gtksharp-env
 container in the Docker side panel and attach it to VS Code, then click the generated container name at
 the top. In the newly opened Code window, wait a few seconds until VS Code is setup in the container,
