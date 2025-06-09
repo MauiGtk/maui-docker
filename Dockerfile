@@ -20,6 +20,7 @@ RUN dotnet new install GtkSharp.Template.CSharp
 # install MAUI
 WORKDIR /mauienv
 # as of commit c005e3a -> should build on linux
+# note: comment out all following commands, if you maintain your own maui-linux folder as a container volume:
 RUN git clone https://github.com/jsuarezruiz/maui-linux
 WORKDIR /mauienv/maui-linux
 # from https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36
