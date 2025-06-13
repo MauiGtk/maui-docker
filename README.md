@@ -1,6 +1,6 @@
 # maui-docker -- a Docker container for reproducably setting up a MAUI development environment
 
-This is currendly only intended to demonstrate issues with the [MAUI](https://github.com/jsuarezruiz/maui-linux) Gtk platform and not 
+This is currendly only intended to demonstrate issues with the [MAUI](https://github.com/lytico/maui) Gtk platform and not 
 for active development as changes in the container would get lost on a `docker build`. I'm working on a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase.
 
 Note: You need to have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed and set up 
@@ -24,9 +24,9 @@ Alternatively, use Visual Studio Code to handle the display and have a deeper lo
 * then click the generated container name at the top. 
 * In the newly opened Code window, wait a few seconds until VS Code is setup in the container.
 
-Finally open folder /mauienv/maui-linux/ and enter these commands in VS Codes terminal window:
+Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal window:
 
-    cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
+    cd /mauienv/maui/src/Controls/samples/Controls.Sample
     dotnet run --framework net8.0-gtk
 
 ![Controls.Sample](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSample.png)
