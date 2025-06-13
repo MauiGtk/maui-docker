@@ -28,8 +28,12 @@ Alternatively, use Visual Studio Code to handle the display and have a deeper lo
     cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
     dotnet run --framework net8.0-gtk
 
+![Controls.Sample](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSample.png)
+
 Also have a look at
 
     cd ../Controls.Sample.Gtk
     cp ../Controls.Sample/Resources/Images/calculator.png ./dotnet_bot.png  # someone forgot to git add the image
     dotnet run
+
+![Controls.Sample.Gtk](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSampleGtk.png)
