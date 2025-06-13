@@ -1,7 +1,7 @@
 # maui-docker -- a Docker container for reproducably setting up a MAUI development environment
 
-This is intended to demonstrate issues with the [MAUI](https://github.com/jsuarezruiz/maui-linux) Gtk platform and not 
-for active development as changes in the container would get lost on a `docker build`. I'm currently working on a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase.
+This is currendly only intended to demonstrate issues with the [MAUI](https://github.com/jsuarezruiz/maui-linux) Gtk platform and not 
+for active development as changes in the container would get lost on a `docker build`. I'm working on a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase.
 
 Note: You need to have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed and set up 
 on your system to use this.
