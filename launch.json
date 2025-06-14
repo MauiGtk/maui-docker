@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Launch Controls.Sample",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build.Controls.Sample",
+            "program": "${workspaceRoot}/maui/src/Controls/samples/Controls.Sample/bin/Debug/net8.0-gtk/linux-x64/Maui.Controls.Sample.dll",
+            "args": [ "--framework net8.0-gtk" ],
+            "cwd": "${workspaceRoot}/maui/src/Controls/samples/Controls.Sample",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
