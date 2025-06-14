@@ -5,11 +5,7 @@
     "context": ".."
   },
   "workspaceFolder": "/mauienv",
-//  "workspaceMount": "/home/thomas/maui-docker/maui,target=/mauienv,type=bind,consistency=cached",
-  "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=delegated",
-//  "mounts": [
-//    "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=cached"
-//  ],
+  "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=cached",
   "customizations": {
     "vscode": {
       "extensions": [
