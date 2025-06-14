@@ -10,6 +10,7 @@
     "vscode": {
       "extensions": [
         "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
         "ms-vscode.mono-debug",
         "eamodio.gitlens"
       ]

@@ -29,6 +29,8 @@ Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal
     cd /mauienv/maui/src/Controls/samples/Controls.Sample
     dotnet run --framework net8.0-gtk
 
+... or simply hit Ctrl-Shift-D and launch the sample by pressing the play button.
+
 ![Controls.Sample](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSample.png)
 
 Also have a look at

@@ -1,6 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
+COPY launch.json .vscode
+COPY tasks.json .vscode
+# TODO: add .vs-code volume
 
 # set environment variable/path
 ENV DOTNET_ROOT=/usr/share/dotnet
@@ -32,11 +35,11 @@ WORKDIR /mauienv
 # 6. inside the container start ./build-gtk-platform.sh
 # finally, if needed, again disable the local display using xhost -
 
-# ___ Read-Only Setup with MAUI Buil Already as Part of the Container Image __
+# ___ Read-Only Setup with MAUI Build Already as Part of the Container Image __
 RUN git clone https://github.com/lytico/maui
 WORKDIR /mauienv/maui
-# make sure to only include Gtk platform using sed
-# ( see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36 )
+# # make sure to only include Gtk platform using sed
+# # ( see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36 )
 RUN sed -i 's/_IncludeGtk></_IncludeGtk>true</g' Directory.Build.Override.props.in
 RUN sed -i 's/_IncludeWindows>true</_IncludeWindows></g' Directory.Build.Override.props.in
 RUN sed -i 's/_IncludeTizen>true</_IncludeTizen></g' Directory.Build.Override.props.in
