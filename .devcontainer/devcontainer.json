@@ -5,7 +5,7 @@
     "context": ".."
   },
   "workspaceFolder": "/mauienv",
-  "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=cached",
+  "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv/maui,type=bind,consistency=cached",
   "customizations": {
     "vscode": {
       "extensions": [
