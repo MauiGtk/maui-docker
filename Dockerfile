@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
-COPY launch.json .vscode
-COPY tasks.json .vscode
+COPY launch.json .vscode/launch.json
+COPY tasks.json .vscode/tasks.json
 # TODO: add .vs-code volume
 
 # set environment variable/path
@@ -25,9 +25,11 @@ WORKDIR /mauienv
 # if you want to maintain a maui folder locally, mapped as a container volume to persist changes done in the container,
 # git clone https://github.com/lytico/maui in the maui-docker folder and make sure it is mounted everytime you run the container, 
 # using the docker run -v option or VS Code with devcontainer extension that is provided in this repo. further instructions below:
-# 1. uncomment this line:
+# 1. uncomment this line (this will prepare a little script for step 6.):
 # RUN echo 'chown -R root:root maui \n cd maui \n dotnet build Microsoft.Maui.BuildTasks.slnf \n dotnet build Microsoft.Maui.Gtk.slnf \n apt clean \n echo "done building maui; now  cd maui/src/Controls/samples/Controls.Sample  and  dotnet run --framework net8.0-gtk"' > build-gtk-platform.sh & chmod a+x build-gtk-platform.sh
+# Note: Instead steps 2-5 you could use VS Code from the local linux "code .", hit Ctrl-Shift-D and launch the Controls.Sample in the upper-left corner VS Code's application window.
 # 2. comment out all following commands from "RUN git clone ..." on.
+# Note:
 # 3. open a terminal; cd into the maui-docker folder and (re)build the docker image with the command docker build -t maui-env .
 # 4 start the container using:
 # xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v "$HOME/maui-docker/maui:/mauienv/maui" -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env bash
@@ -38,8 +40,8 @@ WORKDIR /mauienv
 # ___ Read-Only Setup with MAUI Build Already as Part of the Container Image __
 RUN git clone https://github.com/lytico/maui
 WORKDIR /mauienv/maui
-# # make sure to only include Gtk platform using sed
-# # ( see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36 )
+# make sure to only include Gtk platform using sed
+# ( see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36 )
 RUN sed -i 's/_IncludeGtk></_IncludeGtk>true</g' Directory.Build.Override.props.in
 RUN sed -i 's/_IncludeWindows>true</_IncludeWindows></g' Directory.Build.Override.props.in
 RUN sed -i 's/_IncludeTizen>true</_IncludeTizen></g' Directory.Build.Override.props.in
