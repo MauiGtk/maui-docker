@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
-COPY launch.json .vscode/launch.json
+COPY  launch.json .vscode/launch.json
 COPY tasks.json .vscode/tasks.json
 # TODO: add .vs-code volume
 
@@ -26,29 +26,22 @@ WORKDIR /mauienv
 # git clone https://github.com/lytico/maui in the maui-docker folder and make sure it is mounted everytime you run the container, 
 # using the docker run -v option or VS Code with devcontainer extension that is provided in this repo. further instructions below:
 # 1. uncomment this line (this will prepare a little script for step 6.):
-# RUN echo 'chown -R root:root maui \n cd maui \n dotnet build Microsoft.Maui.BuildTasks.slnf \n dotnet build Microsoft.Maui.Gtk.slnf \n apt clean \n echo "done building maui; now  cd maui/src/Controls/samples/Controls.Sample  and  dotnet run --framework net8.0-gtk"' > build-gtk-platform.sh & chmod a+x build-gtk-platform.sh
-# Note: Instead steps 2-5 you could use VS Code from the local linux "code .", hit Ctrl-Shift-D and launch the Controls.Sample in the upper-left corner VS Code's application window.
+# RUN echo 'chown -R root:root maui \n cd maui \n sed -i "s/>true<\/_Include/><\/_Include/g" Directory.Build.Override.props* \n sed -i "s/_IncludeGtk></_IncludeGtk>true</g" Directory.Build.Override.props* \n dotnet build Microsoft.Maui.BuildTasks.slnf \n dotnet build Microsoft.Maui.Gtk.slnf \n apt clean \n echo "done building maui; now  cd maui/src/Controls/samples/Controls.Sample  and  dotnet run --framework net8.0-gtk"' > build-gtk-platform.sh ; chmod a+x build-gtk-platform.sh
 # 2. comment out all following commands from "RUN git clone ..." on.
-# Note:
 # 3. open a terminal; cd into the maui-docker folder and (re)build the docker image with the command docker build -t maui-env .
 # 4 start the container using:
 # xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v "$HOME/maui-docker/maui:/mauienv/maui" -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env bash
-# 5. install an editor like nano or vi to make sure only the <_IncludeGtk> tag in Directory.Build.Override.props.in has the value 'true' (<_IncludeGtk>true</_IncludeGtk>)
-# 6. inside the container start ./build-gtk-platform.sh
-# finally, if needed, again disable the local display using xhost -
+# 5. inside the container start ./build-gtk-platform.sh
+# Note: Instead step 3-4 you could use VS Code from the local linux "code .", after step 5. (after VS Code "Reopen in Container", then ) hit Ctrl-Shift-D and launch the Controls.Sample in the upper-left corner VS Code's application window.
+# finally, if needed, again disable the local display using "xhost -"
 
 # ___ Read-Only Setup with MAUI Build Already as Part of the Container Image __
 RUN git clone https://github.com/lytico/maui
 WORKDIR /mauienv/maui
 # make sure to only include Gtk platform using sed
 # ( see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36 )
-RUN sed -i 's/_IncludeGtk></_IncludeGtk>true</g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeWindows>true</_IncludeWindows></g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeTizen>true</_IncludeTizen></g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeAndroid>true</_IncludeAndroid></g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeIos>true</_IncludeIos></g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeMacCatalyst>true</_IncludeMacCatalyst></g' Directory.Build.Override.props.in
-RUN sed -i 's/_IncludeMacOS>true</_IncludeMacOS></g' Directory.Build.Override.props.in
+RUN sed -i 's/>true<\/_Include/><\/_Include/g' Directory.Build.Override.props*
+RUN sed -i 's/_IncludeGtk></_IncludeGtk>true</g' Directory.Build.Override.props*
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
 RUN apt clean
