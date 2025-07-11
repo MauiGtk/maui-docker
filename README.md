@@ -3,26 +3,25 @@
 In defailt mode, this is intended to demonstrate issues with the [MAUI](https://github.com/lytico/maui) Gtk platform and not 
 for active development as changes in the container would get lost on a `docker build`. But there is a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase (see "Optional Setup with Persistent Volume Share on Local Host" section in the Dockerfile).
 
-Note: You need to have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed and set up 
-on your system to use this.
+Note 1: You need to have [Docker](https://docs.docker.com/engine/install/ubuntu/) installed and set up 
+on your system to use this. Maks sure the docker demon is running:
+
+Note 2: Use the main branch of this repo to have a bare docker-only setup without source code colume mount and VS Code support.
+
+    sudo service docker start
 
 After git-cloning and cd into the repo, build the image:
 
     docker build -t maui-env .
 
-This will build MAUI along with GtkSharp already. Then start the container (which can take a minute) using:
+Note: If you are working with Windows + WSL and the build hangs at a certain step, it often helps to restart the WSL with "wsl --shutdown" in a Powershell window.
 
-    xhost +  # allow container to use the X display of the host
-    # replace the 'dotnet ...' command with 'bash' to have a look inside the container:
-    docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk
-    xhost -  # restrict display access again
-
-Alternatively, use Visual Studio Code to handle the display and have a deeper look at the MAUI sources:
+This branch is for Visual Studio Code to handle the display and persistent maui source code volume, in case you want to contribute:
 * Start VS Code in a new bash outside the container with `code .`,
 * then install VS Codes 'Dev Containers' and 'Docker' extension. After that, 
-* in the 'Containers' item of side panel start the 'maui-env' container and right click / attach it to VS Code, 
-* then click the generated container name at the top. 
+* F1 click "Dev Containers: Reopen in Container" (or click "Reopen in Container" if asked in a notification upon subsequent starts of VS Code)
 * In the newly opened Code window, wait a few seconds until VS Code is setup in the container.
+* Now build maui (TODO: detailed description)
 
 Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal window:
 

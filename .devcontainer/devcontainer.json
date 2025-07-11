@@ -2,7 +2,8 @@
   "name": "MAUI Linux Dev Container",
   "build": {
     "dockerfile": "../Dockerfile",
-    "context": ".."
+    "context": "..",
+    "args": { "USERNAME": "${env:USER}" }
   },
   "workspaceFolder": "/mauienv",
   "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv/maui,type=bind,consistency=cached",
@@ -16,5 +17,5 @@
       ]
     }
   },
-  "remoteUser": "root"
+  "containerUser": "${env:USERNAME}"
 }
