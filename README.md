@@ -22,7 +22,7 @@ docker pull ghcr.io/MauiGtk/maui-docker:main
 # Build Docker environment
 xhost +  # allow container to use the X display of the host
 # replace the 'dotnet ...' command with 'bash' to have a look inside the container:
-docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t ghcr.io/MauiGtk/maui-docker:main dotnet run --framework net8.0-gtk
+docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t ghcr.io/mauigtk/maui-docker:main dotnet run --framework net8.0-gtk
 xhost -  # restrict display access again
 ```
 
