@@ -31,7 +31,7 @@ xhost -  # restrict display access again
 ```sh
 # git clone
 git clone https://github.com/MauiGtk/maui-docker.git
-cd MauiGtk
+cd maui-docker
 
 # Build Docker package
 docker build -t maui-env .
