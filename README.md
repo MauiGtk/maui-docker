@@ -29,8 +29,8 @@ xhost -  # restrict display access again
 > [!note]
 > If you want to use a specific tag, change `:sha256-` to `@sha256:`. (See also [#3](https://github.com/MauiGtk/maui-docker/issues/3))
 > 
-> ❌: `ghcr.io/mauigtk/maui-docker:sha256-2dcf2050c0c9443706675d278f8e73dd8ab08d625b48a263238798f235bcd7cb` 
-> ✅: `ghcr.io/mauigtk/maui-docker@sha256:2dcf2050c0c9443706675d278f8e73dd8ab08d625b48a263238798f235bcd7cb`
+> - ❌: `ghcr.io/mauigtk/maui-docker:sha256-2dcf2050c0c9443706675d278f8e73dd8ab08d625b48a263238798f235bcd7cb`
+> - ✅: `ghcr.io/mauigtk/maui-docker@sha256:2dcf2050c0c9443706675d278f8e73dd8ab08d625b48a263238798f235bcd7cb`
 
 #### From Sources
 
